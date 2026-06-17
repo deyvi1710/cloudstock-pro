@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - CloudStock Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary": "#004ac6",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "outline": "#737686",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed": "#dbe1ff",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-low": "#eff4ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#00174b",
+                        "on-background": "#0b1c30",
+                        "secondary": "#545f73",
+                        "on-surface-variant": "#434655",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-container": "#586377",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#bdffdb",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#007d55",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary": "#006242",
+                        "secondary-container": "#d5e0f8",
+                        "secondary-fixed": "#d8e3fb",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "sidebar-width": "260px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Geist", "sans-serif"],
+                        "headline-md": ["Geist", "sans-serif"],
+                        "headline-lg": ["Geist", "sans-serif"],
+                        "title-lg": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "headline-lg-mobile": ["Geist", "sans-serif"],
+                        "label-sm": ["Geist", "sans-serif"],
+                        "body-lg": ["Geist", "sans-serif"],
+                        "display": ["Geist", "sans-serif"],
+                        "label-md": ["Geist", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Geist font placeholder if not loaded, fallback to sans */
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
+        body { font-family: 'Geist', sans-serif; background-color: #f8fafc; }
+        
+        /* Ambient Shadows & Tonal Layers */
+        .level-1-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 1rem; /* 16px */
+            padding: 1.5rem; /* 24px */
+        }
+        
+        .btn-primary {
+            background-color: #2563eb;
+            color: #ffffff;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 2px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #1d4ed8;
+        }
+        .btn-primary:active {
+            border-bottom-width: 0;
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-lg px-md bg-surface border-r border-outline-variant fixed left-0 top-0 w-sidebar-width z-50">
+<div class="mb-xl">
+<h1 class="font-display text-headline-md font-bold text-primary">CloudStock Pro</h1>
+<p class="font-body-md text-body-md text-secondary mt-1">Enterprise Inventory</p>
+</div>
+<div class="flex-1 space-y-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg font-bold transition-all duration-200 ease-in-out font-headline-sm text-headline-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out font-headline-sm text-headline-sm" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out font-headline-sm text-headline-sm" href="#">
+<span class="material-symbols-outlined">assessment</span>
+                Reports
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out font-headline-sm text-headline-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto">
+<button class="w-full btn-primary py-3 px-4 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined">add</span>
+                New Product
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-[260px] h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-xl bg-surface-container-lowest border-b border-outline-variant shadow-sm z-40 sticky top-0">
+<div class="flex items-center gap-4 flex-1">
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold hidden md:block">Overview</h1>
+<div class="relative max-w-md w-full ml-4 hidden lg:block focus-within:ring-2 focus-within:ring-primary/20 rounded-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant rounded-full font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Search inventory..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small, professional headshot of an inventory manager in a bright, modern office setting. The portrait is sharply focused with soft, high-key lighting, emphasizing a clean and trustworthy corporate identity. The individual wears minimal, modern business attire against a subtly blurred, light-mode architectural background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdwjDWrpKfAVP5-NwXu5NgvLHuCRF8JCsNLINZ8lhNWAD9h5ko348mv3p4qCk5dbJOmIQ-s5MRGkXtlOjbcGD-c91u95muYCFeRVd1Dp1GDRmPqK8mXXLTzrd4Xg4ThpN-wY_eW3ESlPuMwXSLvf9Ew2rRnsnSiDti__nOnXoJjGKwaUWV8SYQ--mWzfZiE01S9w4_WU18hrCAG_LtADOTHyqXlHVlwrlr1mv3wvglcJJ9Sg_6XfSXttloXG02BdFNFec6PIAQ6y0"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-margin-desktop bg-background">
+<!-- Page Header -->
+<div class="mb-gutter flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Dashboard</h2>
+<p class="font-body-md text-body-md text-secondary mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                        Today, October 24, 2023
+                    </p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- KPI Cards Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
+<!-- KPI 1 -->
+<div class="level-1-card flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-tertiary/10 text-tertiary rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+                            +12%
+                        </span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-secondary mb-1">Total Productos</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">1,284</h3>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="level-1-card flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-variant text-secondary rounded-full">
+                            Attention Req.
+                        </span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-secondary mb-1">Stock Bajo</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">14</h3>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="level-1-card flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">block</span>
+</div>
+</div>
+<div>
+<p class="font-body-md text-body-md text-secondary mb-1">Agotados</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">5</h3>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="level-1-card flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+</div>
+<div>
+<p class="font-body-md text-body-md text-secondary mb-1">Valor Inventario</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">$45,200</h3>
+</div>
+</div>
+</div>
+<!-- Main Content Area: Chart + Recent Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Main Chart (Takes 2 columns on lg) -->
+<div class="lg:col-span-2 level-1-card flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Movimientos de Inventario</h3>
+<p class="font-body-md text-body-md text-secondary">Entradas vs Salidas Mensuales</p>
+</div>
+<button class="text-secondary hover:text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Chart Placeholder (Stylized with CSS gradient to simulate area chart) -->
+<div class="flex-1 w-full min-h-[300px] relative rounded-lg bg-surface-bright border border-outline-variant/30 overflow-hidden flex items-end">
+<!-- Y-Axis Labels -->
+<div class="absolute left-2 top-2 bottom-8 flex flex-col justify-between font-label-sm text-label-sm text-outline-variant">
+<span>1000</span>
+<span>750</span>
+<span>500</span>
+<span>250</span>
+<span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pt-4 pb-8 px-10 pointer-events-none">
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/40"></div>
+</div>
+<!-- Simulated Area Chart -->
+<div class="relative w-full h-[80%] mx-10 mb-8 flex items-end gap-1">
+<!-- SVG for smooth area curve -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Background Fill (Entradas) -->
+<path d="M0,100 L0,60 Q25,30 50,50 T100,20 L100,100 Z" fill="#dce9ff" opacity="0.6"></path>
+<!-- Line (Entradas) -->
+<path d="M0,60 Q25,30 50,50 T100,20" fill="none" stroke="#2563eb" stroke-width="2"></path>
+<!-- Background Fill (Salidas) -->
+<path d="M0,100 L0,80 Q30,90 60,60 T100,70 L100,100 Z" fill="#ffdad6" opacity="0.4"></path>
+<!-- Line (Salidas) -->
+<path d="M0,80 Q30,90 60,60 T100,70" fill="none" stroke="#ba1a1a" stroke-dasharray="4,2" stroke-width="2"></path>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-2 left-10 right-10 flex justify-between font-label-sm text-label-sm text-secondary">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span>Jun</span>
+</div>
+<!-- Legend -->
+<div class="absolute top-4 right-4 flex gap-4 font-label-md text-label-md bg-white/80 px-3 py-1.5 rounded-full border border-outline-variant/50 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="text-on-surface">Entradas</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="text-on-surface">Salidas</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="lg:col-span-1 level-1-card flex flex-col h-[400px] lg:h-auto">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-on-surface">Actividad Reciente</h3>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">Ver todo</a>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-4">
+<!-- Activity Item 1 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Product X added</p>
+<p class="font-body-md text-body-md text-secondary text-sm">SKU-9982 added to Main Warehouse</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">10 mins ago</p>
+</div>
+</div>
+<div class="w-full h-px bg-surface-variant"></div>
+<!-- Activity Item 2 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 flex-shrink-0 flex items-center justify-center text-secondary mt-1">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Stock update for Y</p>
+<p class="font-body-md text-body-md text-secondary text-sm">-50 units dispatched for Order #102</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">1 hour ago</p>
+</div>
+</div>
+<div class="w-full h-px bg-surface-variant"></div>
+<!-- Activity Item 3 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-error/10 flex-shrink-0 flex items-center justify-center text-error mt-1">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Low stock alert</p>
+<p class="font-body-md text-body-md text-secondary text-sm">Product Z dropped below minimum threshold (10 units)</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">3 hours ago</p>
+</div>
+</div>
+<div class="w-full h-px bg-surface-variant"></div>
+<!-- Activity Item 4 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex-shrink-0 flex items-center justify-center text-tertiary mt-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Inventory Audit Complete</p>
+<p class="font-body-md text-body-md text-secondary text-sm">Monthly cycle count finished successfully</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">Yesterday</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

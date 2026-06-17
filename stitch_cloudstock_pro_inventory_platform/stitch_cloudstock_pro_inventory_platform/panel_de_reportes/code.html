@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reportes y Estadísticas - CloudStock Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary": "#004ac6",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "outline": "#737686",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed": "#dbe1ff",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-low": "#eff4ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#00174b",
+                        "on-background": "#0b1c30",
+                        "secondary": "#545f73",
+                        "on-surface-variant": "#434655",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-container": "#586377",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#bdffdb",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#007d55",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary": "#006242",
+                        "secondary-container": "#d5e0f8",
+                        "secondary-fixed": "#d8e3fb",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "sidebar-width": "260px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "title-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "display": ["Geist"],
+                        "label-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-lg px-md z-50 hidden md:flex">
+<div class="mb-xl px-sm">
+<h1 class="font-display text-headline-md font-bold text-primary">CloudStock Pro</h1>
+<p class="font-label-sm text-label-sm text-secondary mt-xs uppercase tracking-wider">Enterprise Inventory</p>
+</div>
+<nav class="flex-1 space-y-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary text-on-primary font-bold transition-all duration-200 ease-in-out font-label-md text-label-md shadow-sm" href="#">
+<span class="material-symbols-outlined fill" data-icon="assessment">assessment</span>
+                Reports
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-md px-lg rounded-lg flex items-center justify-center gap-sm hover:bg-primary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Product
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-sidebar-width min-w-0">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-260px)] z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm h-16 px-xl flex justify-between items-center transition-all duration-200 ease-in-out">
+<div class="flex items-center flex-1">
+<div class="md:hidden flex items-center mr-md">
+<button class="text-on-surface-variant p-sm rounded-lg hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<div class="hidden md:flex relative w-96 max-w-full focus-within:ring-2 focus-within:ring-primary/20 rounded-lg">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-bright border border-outline-variant rounded-lg text-body-md font-body-md focus:outline-none focus:border-primary transition-colors" placeholder="Search reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-sm right-sm w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden border border-outline-variant cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a business executive in a modern corporate setting. The lighting is soft and natural, suggesting a high-end office environment. The color palette is neutral with hints of corporate blue. The mood is confident and reliable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs7R_p6IrXV9xdivQnYx-CWFXpnspMALXbvnbgHSY114O8LqQtyb1lCWKG5ndEuWdOeYmhjJ2uGLB0S6UoP-E5SQj3zEQKLrRwnHuO1xx4XhF6fMj4w2YPPZDj-s6Xhlg-WK_NiXqR0KEmUwd7h8tGtfaBF3iF5KlqUIHNueR956lPrMRgQ1OKMtV1UJEPENJHTHB9O8xJ7MGnhzcHfNcC296gs5yNpNsw3VS2hrZqlmpJjr2-RW67YTSeV6noaU4YojxuHJr4UJk"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 mt-16 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Reportes y Estadísticas</h2>
+<p class="font-body-md text-body-md text-secondary mt-xs">Visualización avanzada de métricas de inventario y ventas.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+                        Exportar PDF
+                    </button>
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="table_view">table_view</span>
+                        Exportar Excel
+                    </button>
+</div>
+</div>
+<!-- Mini KPIs Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-xl">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="p-sm bg-primary-fixed rounded-lg text-on-primary-fixed">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-container/10 px-xs py-[2px] rounded-full flex items-center gap-[2px]">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_upward">arrow_upward</span> 12.5%
+                        </span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-secondary mb-xs">Ventas Totales (Mes)</h3>
+<p class="font-headline-md text-headline-md text-on-surface">$124,500</p>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="p-sm bg-secondary-fixed rounded-lg text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+</div>
+<span class="font-label-sm text-label-sm text-error bg-error-container/20 px-xs py-[2px] rounded-full flex items-center gap-[2px]">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_downward">arrow_downward</span> 3.2%
+                        </span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-secondary mb-xs">Valor del Stock</h3>
+<p class="font-headline-md text-headline-md text-on-surface">$845,200</p>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="p-sm bg-surface-variant rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="conveyor_belt">conveyor_belt</span>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-secondary mb-xs">Rotación de Inventario</h3>
+<p class="font-headline-md text-headline-md text-on-surface">4.2x</p>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="p-sm bg-error-container rounded-lg text-on-error-container">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container-high px-xs py-[2px] rounded-full">
+                            Requiere atención
+                        </span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-secondary mb-xs">Items Bajo Stock Mínimo</h3>
+<p class="font-headline-md text-headline-md text-on-surface">18</p>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Line Chart: Tendencia -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface">Tendencia de Inventario vs Ventas</h3>
+<button class="p-xs text-secondary hover:text-primary transition-colors rounded hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex-1 relative min-h-[300px]">
+<canvas id="trendChart"></canvas>
+</div>
+</div>
+<!-- Doughnut Chart: Categorías -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface">Movimiento por Categoría</h3>
+<button class="p-xs text-secondary hover:text-primary transition-colors rounded hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex-1 relative min-h-[250px] flex items-center justify-center">
+<canvas id="categoryChart"></canvas>
+</div>
+</div>
+<!-- Horizontal Bar Chart: Productos -->
+<div class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col mt-gutter">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface">Top 5 Productos Más Vendidos</h3>
+<div class="flex gap-sm">
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-sm py-xs rounded-lg">Este Mes</span>
+</div>
+</div>
+<div class="flex-1 relative min-h-[250px]">
+<canvas id="topProductsChart"></canvas>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Chart.js Initialization -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Common Options
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: 'Geist',
+                                size: 12
+                            },
+                            color: '#545f73' // secondary
+                        }
+                    }
+                }
+            };
+
+            // Trend Chart (Line)
+            const ctxTrend = document.getElementById('trendChart').getContext('2d');
+            new Chart(ctxTrend, {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
+                    datasets: [
+                        {
+                            label: 'Nivel de Inventario',
+                            data: [650, 590, 800, 810, 560, 550, 400],
+                            borderColor: '#004ac6', // primary
+                            backgroundColor: 'rgba(0, 74, 198, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Ventas',
+                            data: [280, 480, 400, 190, 860, 270, 900],
+                            borderColor: '#007d55', // tertiary-container
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e5eeff' } // surface-container
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Category Chart (Doughnut)
+            const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+            new Chart(ctxCategory, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Electrónica', 'Mobiliario', 'Suministros', 'Otros'],
+                    datasets: [{
+                        data: [45, 25, 20, 10],
+                        backgroundColor: [
+                            '#004ac6', // primary
+                            '#dbe1ff', // primary-fixed
+                            '#007d55', // tertiary-container
+                            '#c3c6d7'  // outline-variant
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    cutout: '70%'
+                }
+            });
+
+            // Top Products Chart (Horizontal Bar)
+            const ctxProducts = document.getElementById('topProductsChart').getContext('2d');
+            new Chart(ctxProducts, {
+                type: 'bar',
+                data: {
+                    labels: ['Servidor Dell R740', 'Monitor UltraSharp 27"', 'Switch Cisco Catalyst', 'Silla Ergonómica Pro', 'Laptop ThinkPad T14'],
+                    datasets: [{
+                        label: 'Unidades Vendidas',
+                        data: [120, 190, 85, 210, 150],
+                        backgroundColor: '#2563eb', // primary-container
+                        borderRadius: 4,
+                        barThickness: 24
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { color: '#e5eeff' }
+                        },
+                        y: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

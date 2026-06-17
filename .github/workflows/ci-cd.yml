@@ -19,13 +19,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: |
-            backend/package-lock.json
-            frontend/package-lock.json
 
       - name: 📦 Instalar dependencias del Backend
-        run: npm ci
+        run: npm install
         working-directory: ./backend
 
       - name: 🧪 Tests del Backend
@@ -33,7 +29,7 @@ jobs:
         working-directory: ./backend
 
       - name: 📦 Instalar dependencias del Frontend
-        run: npm ci
+        run: npm install
         working-directory: ./frontend
 
       - name: 🏗️ Build del Frontend (Vite)
